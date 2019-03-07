@@ -1,6 +1,6 @@
-name: gnome-boxes
-summary: GNOME 3 application to access remote or virtual systems. 
-description: an application of the GNOME Desktop Environment, used to access remote or virtual systems.
+name: gnome-builder
+summary: Develop software for GNOME. 
+description: An IDE for writing GNOME-based software.
   
 adopt-info: devmode # use 'strict' once you have the right plugs and slots
 
@@ -29,21 +29,21 @@ architectures:
       - CMAKE_LIBRARY_PATH: $CMAKE_LIBRARY_PATH:$SNAPCRAFT_STAGE/lib:$SNAPCRAFT_STAGE/usr/lib:$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
 
 apps:
-  gnome-boxes:
-    command: bin/gnome-boxes
+  gnome-builder:
+    command: bin/gnome-builder
     plugs:
       - home
       - network
       - removable-media
 
 parts:
-gnome-boxes:
+gnome-builder:
     plugin: 
-    source: https://github.com/GNOME/gnome-boxes.git
+    source: https://github.com/GNOME/gnome-builder.git
     source-type: git
     override-pull: |
-     git clone https://github.com/GNOME/gnome-boxes.git src/github.com/GNOME/gnome-boxes
-       cd src/github.com/GNOME/gnome-boxes
+     git clone https://github.com/GNOME/gnome-builder.git src/github.com/GNOME/gnome-builder
+       cd src/github.com/GNOME/gnome-builder
       last_committed_tag="$(git describe --tags --abbrev=0)"
       last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
       last_released_tag="$(snap info $SNAPCRAFT_PROJECT_NAME | awk '$1 == "beta:" { print $2 }')"
@@ -56,14 +56,14 @@ gnome-boxes:
       snapcraftctl set-version "$(git describe --tags | sed 's/v//')"
       override-build: |
       export GOPATH=$PWD
-      cd src/github.com/GNOME/gnome-boxes
+      cd src/github.com/GNOME/gnome-builder
       env CGO_ENABLED=0 GOOS=linux \
       go build --ldflags "-s -w \
-        -X 'github.com/GNOME/gnome-boxes/version.GitCommit=$(git rev-list -1 HEAD)' \
-        -X 'github.com/GNOME/gnome-boxes/version.Version=$(git describe --tags --abbrev=0)'" \
-        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/gnome-boxes
+        -X 'github.com/GNOME/gnome-builder/version.GitCommit=$(git rev-list -1 HEAD)' \
+        -X 'github.com/GNOME/gnome-builder/version.Version=$(git describe --tags --abbrev=0)'" \
+        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/gnome-builder
     build-snaps:
-      - vala
+      - c
     build-packages:
       - git
       - sed
