@@ -12,7 +12,7 @@
 </p>
 -->
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/45159366/53942626-17200500-4070-11e9-8a67-153f22471c77.png">
+  <img src="https://user-images.githubusercontent.com/45159366/53943390-db863a80-4071-11e9-88b7-433eaec0718a.png">
   <br />
 </h1>
 
