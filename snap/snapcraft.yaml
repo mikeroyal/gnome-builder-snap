@@ -1,5 +1,5 @@
 name: gnome-builder
-version: 3.30.2
+version: git
 summary: Develop software for GNOME. 
 description: An IDE for writing GNOME-based software.
   
